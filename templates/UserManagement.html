@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="static\images\hex.ico">
+    <title>User Management</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="static/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/libs/css/style.css">
+    <link rel="stylesheet" href="static/vendor/fonts/fontawesome/css/fontawesome-all.css">
+</head>
+<body>
+    <div id="loader" class="lds-dual-ring hidden overlay"></div>
+    <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+        <div class="dashboard-header">
+            <nav class="navbar navbar-expand-lg bg-white fixed-top">
+                <a class="navbar-brand" href="index.html">
+                    <img src="static\images\hexawarelogo.png" width="50" height="35">
+                    <span>Proctoring</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto ">
+                        <li class="nav-item dropdown mt-3">
+                            <h4>Welcome  &nbsp;&nbsp;<span id="UserName"> {{session['logged_in_user_id']}}</span></h4>
+                            <input type="hidden" id="logged_in_user_role" value="{{session['logged_in_user_role']}}"/>
+                        </li>
+                        <li class="nav-item dropdown nav-user mt-3">
+                            <a class="cm-dropdown-item" onclick="LogOut()" href="#">
+                                <i class="fas fa-power-off mr-2"></i>Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end navbar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- left sidebar -->
+        <!-- ============================================================== -->
+        <div class="nav-left-sidebar sidebar-dark">
+            <div class="menu-list">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-divider">
+                                Menu
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="index.html" aria-expanded="false" data-target="#submenu-1"
+                                   aria-controls="submenu-1">
+                                    <i class="fa fa-fw fa-list"></i>Projects List
+                                    <span class="badge badge-success">6</span>
+                                </a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="AgentList.html" aria-expanded="false" data-target="#submenu-2"
+                                   aria-controls="submenu-2"><i class="fa fa-fw fa-user"></i>Agent List</a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="OnboardedAgent.html" aria-expanded="false"
+                                   data-target="#submenu-3" aria-controls="submenu-3">
+                                    <i class="fa fa-fw fa-user-circle"></i>Onboarded Agent
+                                </a>
+
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="UserManagement.html" aria-expanded="false"
+                                   data-target="#submenu-4" aria-controls="submenu-4">
+                                    <i class="fa fa-fw fa-users"></i>User Management
+                                </a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="ViolationMgmt.html" aria-expanded="false"
+                                   data-target="#submenu-5" aria-controls="submenu-5">
+                                    <i class="fa fa-fw fa-address-card"></i>Violation Management
+                                </a>
+                            </li>
+                            <li class="nav-item" id="ConfigurationsMenu">
+                                <a class="nav-link" href="Configurations.html" aria-expanded="false"
+                                   data-target="#submenu-5" aria-controls="submenu-5">
+                                    <i class="fa fa-fw fa-cogs"></i>Configurations
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="dashboard-wrapper">
+            <div class="container-fluid  dashboard-content">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="pageheader-title">User Management</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <form method="post" id="FormUserMang">
+                            <input type="hidden" value="{{csrf_token()}}" id="csrf_token"/>
+                            <div class="form-inline">
+                                <div class="filter-group">
+                                    <input type="text" placeholder="Search by name" id="fname" class="form-control">
+                                </div>
+                                <div class="filter-group pr-2 pl-2">
+                                    <select class="form-control" id="fProject">
+                                        <option value="">Select Project</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- ============================================================== -->
+            <!-- basic table  -->
+            <!-- ============================================================== -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                <div class="simple-card">
+                    <ul class="nav nav-tabs" id="myTab5" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active border-left-0" id="product-tab-1" data-toggle="tab" href="#tab-1"
+                               role="tab" aria-controls="product-tab-1" aria-selected="true">Agents</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="product-tab-2" data-toggle="tab" href="#tab-2" role="tab"
+                               aria-controls="product-tab-2" onclick="EsTableData()" aria-selected="false">
+                                Live
+                                Agents
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent5">
+                        <div class="tab-pane fade show active" id="tab-1" role="tabpanel"
+                             aria-labelledby="product-tab-1">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>User ID</th>
+                                            <th>Username</th>
+                                            <th>Project Name</th>
+                                            <th>Login Time</th>
+                                            <th>Logout Time</th>
+                                            <th>Active Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="AgentsData">
+                                    </tfoot>
+                                </table>
+                                <ul  class="float-right pt-4 pagination" id="pagination1"></ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="product-tab-2">
+
+                            <div class="table-responsive">
+                                <div class="text-right">
+                                    <i class="fa fa-refresh fa-5"
+                                       data-toggle="Refresh" onclick="EsTableData()" aria-hidden="true"></i>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Current Project</th>
+                                            <th>Status</th>
+                                            <th>Login Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ESData">
+                                    </tbody>
+                                </table>
+                                <ul  class="float-right pt-4 pagination" id="pagination2"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- end basic table  -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <div class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                    Copyright © 2022 Proctoring. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end footer -->
+    <!-- ============================================================== -->
+    </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+    <script type="text/javascript" src="\static\libs\js\config.js"></script>
+    <script type="text/javascript" src="static/libs/js/jquery-3.6.0.min.js"></script>
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="static/libs/js/main-js.js"></script>
+    <script src="static/libs/js/jq-paginator.js"></script>
+    <script src="static/libs/js/UserManagement.js"></script>
+</body>
+</html>

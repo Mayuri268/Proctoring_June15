@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="static\images\hex.ico">
+    <title>Configurations</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="static/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/libs/css/style.css">
+    <link rel="stylesheet" href="static/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" type="text/css" href="static/vendor/datatables/css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="static/vendor/datatables/css/buttons.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="static/vendor/datatables/css/select.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="static/vendor/datatables/css/fixedHeader.bootstrap4.css">
+    <script type="text/javascript" src="static/libs/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="\static\libs\js\config.js"></script>
+</head>
+<body>
+    <div id="loader" class="lds-dual-ring hidden overlay"></div>
+    <div class="modal" tabindex="-1" role="dialog" id="MyModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-center" id="MsgText">Configuration Updated Successfully!!</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+        <div class="dashboard-header">
+            <nav class="navbar navbar-expand-lg bg-white fixed-top">
+                <a class="navbar-brand" href="index.html">
+                    <img src="static\images\hexawarelogo.png" width="50" height="35">
+                    <span>Proctoring</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto ">
+                        <li class="nav-item dropdown mt-3">
+                            <h4>Welcome  &nbsp;&nbsp;<span id="UserName"> {{session['logged_in_user_id']}}</span></h4>
+                            <input type="hidden" id="logged_in_user_role" value="{{session['logged_in_user_role']}}"/>
+                        </li>
+                        <li class="nav-item dropdown nav-user mt-3">
+                            <a class="cm-dropdown-item" onclick="LogOut()" href="#"><i
+                                    class="fas fa-power-off mr-2"></i>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end navbar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- left sidebar -->
+        <!-- ============================================================== -->
+        <div class="nav-left-sidebar sidebar-dark">
+            <div class="menu-list">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-divider">
+                                Menu
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="index.html" aria-expanded="false" data-target="#submenu-1"
+                                    aria-controls="submenu-1">
+                                    <i class="fa fa-fw fa-list"></i>Projects List
+                                    <span class="badge badge-success">6</span>
+                                </a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="AgentList.html" aria-expanded="false" data-target="#submenu-2"
+                                    aria-controls="submenu-2"><i class="fa fa-fw fa-user"></i>Agent List</a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="OnboardedAgent.html" aria-expanded="false"
+                                    data-target="#submenu-3" aria-controls="submenu-3"><i
+                                        class="fa fa-fw fa-user-circle"></i>Onboarded Agent</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="UserManagement.html" aria-expanded="false"
+                                    data-target="#submenu-4" aria-controls="submenu-4"><i
+                                        class="fa fa-fw fa-users"></i>User Management</a>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="ViolationMgmt.html" aria-expanded="false"
+                                    data-target="#submenu-5" aria-controls="submenu-5"><i
+                                        class="fa fa-fw fa-address-card"></i>Violation Management</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Configurations.html" aria-expanded="false"
+                                    data-target="#submenu-5" aria-controls="submenu-5"><i
+                                        class="fa fa-fw fa-cogs"></i>Configurations</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="dashboard-wrapper">
+            <div class="container-fluid  dashboard-content">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="pageheader-title">Configurations</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="checkboxradio">
+
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post" id="ConfgForm">
+                                    <input type="hidden" value="{{csrf_token()}}" id="csrf_token"/>
+                                    <div class="form-group">
+                                        <label for="input-select">Projects</label>
+                                        <select class="form-control" id="projectName" name="projectName">
+                                            <option value="">Select Project</option>
+                                            {% for row in data %}
+                                            <option value="{{row}}">{{row}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="mobile"
+                                                        id="mobile"><span class="custom-control-label">Mobile Phone
+                                                        Violation</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="multiple"
+                                                        id="multiple"><span class="custom-control-label">Multip Person
+                                                        Violation</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-12 ">
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="book"
+                                                        id="book"><span class="custom-control-label">Pen &nbsp; &
+                                                        &nbsp;Paper Violation</span>
+                                                </label>
+                                                <label class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" name="no_person"
+                                                        id="no_person"><span class="custom-control-label">No Person
+                                                        Violation</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 pl-0">
+                                            <p class="text-right">
+                                                <button type="submit" class="btn btn-space btn-primary">Save</button>
+                                                <button type="button" class="btn btn-space btn-secondary"
+                                                    onclick="Reset()">Reset</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <div class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            Copyright © 2022 Proctoring. All rights reserved.
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end footer -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper -->
+    <!-- ============================================================== -->
+    <!-- Optional JavaScript -->
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="static/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="static/vendor/multi-select/js/jquery.multi-select.js"></script>
+    <script src="static/libs/js/main-js.js"></script>
+    <script src="static/vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="static/vendor/datatables/js/buttons.bootstrap4.min.js"></script>
+    <script src="static/vendor/datatables/js/data-table.js"></script>
+    <script src="static/libs/js/Configurations.js"></script>
+</body>
+
+</html>
